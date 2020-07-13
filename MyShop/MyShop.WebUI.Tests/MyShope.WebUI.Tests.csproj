@@ -99,7 +99,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyShope.WebUI\MyShope.WebUI.csproj">
+    <ProjectReference Include="..\MyShop.WebUI\MyShope.WebUI.csproj">
       <Project>{023741A0-6B38-4511-B59A-FCB8F54B87C7}</Project>
       <Name>MyShope.WebUI</Name>
     </ProjectReference>
