@@ -26,19 +26,24 @@ namespace MyShop.DataAccess.InMemory
         public void Commit()
         {
             cache["products"] = products;
-        }
+        }   
 
         public void Insert(Product p)
         {
             products.Add(p);
         }
 
-        public Product Update(String id)
+        public Product Update(Product p ,String id)
         {
-            Product productToUpdate = products.Find(p => p.Id == id);
+            Product productToUpdate = products.Find(product => product.Id == id);
             if(productToUpdate != null)
             {
-                return productToUpdate;
+                productToUpdate.Name = p.Name;
+                productToUpdate.Price = p.Price;
+                productToUpdate.Category = p.Category;
+                productToUpdate.Description = p.Description;
+                productToUpdate.Image = p.Image;
+                return p;
             }
             else
             {
@@ -61,7 +66,7 @@ namespace MyShop.DataAccess.InMemory
         }
         
         //List of Products
-        public IQueryable Collection()
+        public IQueryable<Product> Collection()
         {
             return products.AsQueryable();
         }
