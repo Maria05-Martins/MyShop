@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.Mvc;
+using MyShop.Core.ViewModels;
 using MyShop.DataAccess.InMemory;
 using MyShope.Core.Models;
 
@@ -12,10 +13,11 @@ namespace MyShope.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepository context;
-
+        ProductCategoryRepository productCategories;
         public ProductManagerController()
         {
             context = new ProductRepository();
+            productCategories = new ProductCategoryRepository();
         }
 
 
@@ -28,8 +30,10 @@ namespace MyShope.WebUI.Controllers
 
         public ActionResult Create()
         {
-            Product product = new Product();
-            return View(product);
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+            viewModel.Product = new Product();
+            viewModel.ProductCategories = productCategories.Collection();
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -56,7 +60,10 @@ namespace MyShope.WebUI.Controllers
             }
             else
             {
-                return View(p);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = new Product();
+                viewModel.ProductCategories = productCategories.Collection();
+                return View(viewModel);
             }
         }
 
