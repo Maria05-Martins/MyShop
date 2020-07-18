@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.Mvc;
+using MyShop.Core.Models;
 using MyShop.Core.ViewModels;
 using MyShop.DataAccess.InMemory;
 using MyShope.Core.Models;
@@ -12,12 +14,12 @@ namespace MyShope.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        ProductRepository context;
-        ProductCategoryRepository productCategories;
+        InMemoryRepository<Product> context;
+        InMemoryRepository<ProductCategory> productCategories;
         public ProductManagerController()
         {
-            context = new ProductRepository();
-            productCategories = new ProductCategoryRepository();
+            context = new InMemoryRepository<Product>();
+            productCategories = new InMemoryRepository<ProductCategory>();
         }
 
 
@@ -53,16 +55,16 @@ namespace MyShope.WebUI.Controllers
 
         public ActionResult Edit(string id)
         {
-            Product p = context.Find(id);
-            if(p==null)
+            Product productToEdit = context.Find(id);
+            if(productToEdit == null)
             {
                 return HttpNotFound();
             }
             else
             {
                 ProductManagerViewModel viewModel = new ProductManagerViewModel();
-                viewModel.Product = new Product();
-                viewModel.ProductCategories = productCategories.Collection();
+                viewModel.Product = productToEdit; //new Product();
+                viewModel.ProductCategories = (IEnumerable<ProductCategory>)productCategories.Collection().Select(p=>p.Category==productToEdit.Category);// productCategories.Collection();
                 return View(viewModel);
             }
         }
@@ -83,7 +85,11 @@ namespace MyShope.WebUI.Controllers
                 }
                 else
                 {
-                    context.Update(product, id);
+                    //context.Update(product, id);
+                    product1ToEdit.Name = product.Name;
+                    product1ToEdit.Description = product.Description;
+                    product1ToEdit.Image = product.Image;
+                    product1ToEdit.Category = product.Category;                
                     context.Commit();
                     return RedirectToAction("Index");
                 }

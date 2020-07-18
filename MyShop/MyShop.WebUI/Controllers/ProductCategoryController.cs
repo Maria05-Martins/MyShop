@@ -11,11 +11,11 @@ namespace MyShope.WebUI.Controllers
     public class ProductCategoryController : Controller
     {
         // GET: ProductCategory
-        ProductCategoryRepository context;
+        InMemoryRepository<ProductCategory> context;
 
         public ProductCategoryController()
         {
-            context = new ProductCategoryRepository();
+            context = new InMemoryRepository<ProductCategory>();
         }
 
 
@@ -76,7 +76,8 @@ namespace MyShope.WebUI.Controllers
                 }
                 else
                 {
-                    context.Update(productCategory, id);
+                    //context.Update(productCategory, id);
+                    productToEdit.Category = productCategory.Category;
                     context.Commit();
                     return RedirectToAction("Index");
                 }
