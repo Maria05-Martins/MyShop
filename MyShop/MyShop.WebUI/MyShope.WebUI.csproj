@@ -226,6 +226,10 @@
       <Project>{98d95479-f1b6-4a65-8c18-7e034a7899ec}</Project>
       <Name>MyShop.DataAccess.InMemory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyShop.DataAccess.SQL\MyShop.DataAccess.SQL.csproj">
+      <Project>{467EDD49-DD3D-4A59-A89C-DFDF600B009A}</Project>
+      <Name>MyShop.DataAccess.SQL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
