@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Security.Permissions;
 using System.Web;
@@ -40,7 +41,7 @@ namespace MyShope.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product,HttpPostedFileBase file)
         {
             if(!ModelState.IsValid)
             {
@@ -48,6 +49,11 @@ namespace MyShope.WebUI.Controllers
             }
             else
             {
+                if(file!=null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image); 
+                }
                 context.Insert(product);
                 context.Commit();
                 return RedirectToAction("Index");
@@ -65,13 +71,13 @@ namespace MyShope.WebUI.Controllers
             {
                 ProductManagerViewModel viewModel = new ProductManagerViewModel();
                 viewModel.Product = productToEdit; //new Product();
-                viewModel.ProductCategories = (IEnumerable<ProductCategory>)productCategories.Collection().Select(p=>p.Category==productToEdit.Category);// productCategories.Collection();
+                viewModel.ProductCategories = productCategories.Collection();
                 return View(viewModel);
             }
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product,string id)
+        public ActionResult Edit(Product product,string id,HttpPostedFileBase file)
         {
             Product product1ToEdit = context.Find(id);
             if(product1ToEdit==null)
@@ -86,6 +92,11 @@ namespace MyShope.WebUI.Controllers
                 }
                 else
                 {
+                    if (file != null)
+                    {
+                        product1ToEdit.Image = product.Id + Path.GetExtension(file.FileName);
+                        file.SaveAs(Server.MapPath("//Content//ProductImages//") + product1ToEdit.Image);
+                    }
                     //context.Update(product, id);
                     product1ToEdit.Name = product.Name;
                     product1ToEdit.Description = product.Description;
