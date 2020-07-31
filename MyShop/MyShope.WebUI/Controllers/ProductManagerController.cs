@@ -10,7 +10,6 @@ using MyShop.Core.Contracts;
 using MyShop.Core.Models;
 using MyShop.Core.ViewModels;
 using MyShop.DataAccess.InMemory;
-using MyShope.Core.Models;
 
 namespace MyShope.WebUI.Controllers
 {

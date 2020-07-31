@@ -348,3 +348,12 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/MyShop/MyShop.Core/Class1.vb
+/MyShop/MyShop.Core/MyShop.Core.vbproj
+/MyShop/MyShop.WebUI/App_Start/IdentityConfig.cs
+/MyShop/MyShop.WebUI/App_Start/Startup.Auth.cs
+/MyShop/MyShop.WebUI/Controllers/AccountController.cs
+/MyShop/MyShop.WebUI/Controllers/ManageController.cs
+/MyShop/MyShop.WebUI/Models/ManageViewModels.cs
+/MyShop/MyShop.WebUI/Models/IdentityModels.cs
+/MyShop/MyShop.WebUI/Models/AccountViewModels.cs

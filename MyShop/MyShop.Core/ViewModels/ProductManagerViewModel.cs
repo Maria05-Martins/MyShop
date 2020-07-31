@@ -1,5 +1,4 @@
 ﻿using MyShop.Core.Models;
-using MyShope.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyShope.Core.Models
+namespace MyShop.Core.Models
 {
     public class Product : BaseEntity
     {
