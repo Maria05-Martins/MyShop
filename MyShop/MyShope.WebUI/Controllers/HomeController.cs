@@ -1,10 +1,12 @@
 ﻿using MyShop.Core.Contracts;
 using MyShop.Core.Models;
+using MyShop.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebGrease.Css.Extensions;
 
 namespace MyShope.WebUI.Controllers
 {
@@ -17,10 +19,24 @@ namespace MyShope.WebUI.Controllers
             this.context = context;
             this.productCategories = productCategories;
         }
-        public ActionResult Index()
+        public ActionResult Index(string Category = null)
         {
-            List<Product> products = context.Collection().ToList();
-            return View(products);
+            List<Product> products;
+            List<ProductCategory> categories = productCategories.Collection().ToList();
+            if(Category == null)
+            {
+                products = context.Collection().ToList();
+            }
+            else
+            {
+                products = context.Collection().Where(p => p.Category == Category).ToList();
+            }
+
+            ProductListingViewModel productListingModel = new ProductListingViewModel();
+            productListingModel.Product = products;
+            productListingModel.ProductCategories = categories;
+
+            return View(productListingModel);
         }
 
         public ActionResult Details(string Id)
