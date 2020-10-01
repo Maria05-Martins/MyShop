@@ -21,9 +21,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Product Admin", "Index", "ProductManager")</li>
-                    <li>@Html.ActionLink("Product Category", "Index", "ProductCategory")</li>
+                    <li>
+                        @Html.ActionLink("Product Admin", "Index", "ProductManager")</
+                                        <a href="~/Views/Shared/_Layout.cshtml">~/Views/Shared/_Layout.cshtml</a>li>
+<li>@Html.ActionLink("Product Category", "Index", "ProductCategory")</li>
                 </ul>
+
+
+
             </div>
         </div>
     </div>
